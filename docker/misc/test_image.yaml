@@ -32,14 +32,6 @@ commandTests:
     exitCode: 0
     expectedOutput: ["PHP 8."]
 
-  - name: "Drupal version"
-    command: "bash"
-    args:
-      - -c 
-      - cat /opt/drupal/web/core/lib/Drupal.php | grep "const VERSION"
-    exitCode: 0
-    expectedOutput: ["VERSION = '9."]
-
   - name: "XML extension"
     command: "bash"
     args:
