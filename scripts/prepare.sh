@@ -31,7 +31,7 @@ checkMemberOfWWW $(whoami) www-data
 ### check sources & conf
 echo -e "\n\tcheckout latest web"
 if [ ! -d "${_PWD}/../unapei.orig" ]; then
-    git clone git@github.com:subskill/unapei.git unapei.orig
+    git clone git@github.com:subskill/unapei.git "${_PWD}/../unapei.orig"
 fi
 echo -e "\n\tcheck branch"
 #in some case index is lost so force rebuild then check branch to change if necessary then pull
@@ -47,17 +47,15 @@ mkdir -p "${_PWD}/../unapei-web" \
     && sudo -p "" -S bash -c "cp -rf ./web \"${_PWD}/../unapei-web/\"" <<< ${PASS} \
     && sudo -p "" -S bash -c "chown -R www-data:www-data \"${_PWD}/../unapei-web\"" <<< ${PASS} \
     && sudo -p "" -S bash -c "chmod -R g+w \"${_PWD}/../unapei-web\"" <<< ${PASS}
-rm -rf "${_PWD}/../unapei-web/web/sites/default.orig"
-mv "${_PWD}/../unapei-web/web/sites/default" "${_PWD}/../unapei-web/web/sites/default.orig"     
+
+#rm -rf "${_PWD}/../unapei-web/web/sites/default.orig"
+#mv "${_PWD}/../unapei-web/web/sites/default" "${_PWD}/../unapei-web/web/sites/default.orig"     
 mv "${_PWD}/../unapei-web/web/sites/unapei.fr" "${_PWD}/../unapei-web/web/sites/default"
 #sed -i 's:sites/unapei.fr/:sites/default/:g' *
-cd "${_PWD}/../unapei-web/web/sites/default"
+cd "${_PWD}/../unapei-web/web/sites/default" || exit
 find . -type f -name "*" -print0 | xargs -0 sed -i 's:sites/unapei.fr/:sites/default/:g'
-cd "${_PWD}"
+cd "${_PWD}" || exit
 
-### check conf
-sudo -p "" -S bash -c "chown -R www-data:www-data \"${_PWD}/../unapei-conf/\"" <<< ${PASS}
-sudo -p "" -S bash -c "chmod g=u -R \"${_PWD}/../unapei-conf/\"" <<< ${PASS}
 
 if [ ! -d "${_PWD}/../unapei-conf" ] || \
     [ ! -f "${_PWD}/../unapei-conf/settings.php" ] || \
@@ -66,9 +64,17 @@ if [ ! -d "${_PWD}/../unapei-conf" ] || \
     [ ! -f "${_PWD}/../unapei-conf/development.services.yml" ] || \
     [ ! -f "${_PWD}/../unapei-conf/sites.php" ]; then 
     echo "Some conf files are missing !"
-    ls -al "${_PWD}/../unapei-conf/"
 fi
-# add sites.php
+### check conf
+cd "${_PWD}/../unapei-conf/"
+sudo -p "" -S bash -c "chown -R www-data:www-data ." <<< ${PASS}
+sudo -p "" -S bash -c "chmod g=u -R ." <<< ${PASS}
+pwd
+ls -al 
+
+
+cd "${_PWD}/../unapei-conf" || exit
+find . -type f -name "*" -print0 | xargs -0 sed -i 's:sites/unapei.fr/:sites/default/:g'
 
 #echo -e "\n\tCONF DIR"
 #ls -al "${_PWD}/../unapei-conf/"
@@ -87,3 +93,5 @@ fi
 
 #sudo chown -R www-data:www-data ${_PWD}/../unapei.orig
 #sudo chown -R www-data:www-data ${_PWD}/../unapei
+
+cd "${_PWD}" || exit

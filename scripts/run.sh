@@ -18,6 +18,7 @@ check "docker ps | grep mariadb" " \
         --network capfalc \
         --name mariadb \
         --stop-signal SIGTERM \
+        -v "${_PWD}/../unapei-conf/db_unapei_250322.sql:/tmp/db.sql" \
         -p 127.0.0.1:3306:3306/tcp \
         -e MARIADB_USER=ypetit \
         -e MARIADB_PASSWORD=Mcas2021 \
@@ -36,6 +37,7 @@ docker run -it --rm \
         --stop-signal SIGTERM \
         -p 127.0.0.1:8080:80/tcp \
         -v "${_PWD}/../unapei-web/web:/var/www/html" \
+        -v "${_PWD}/../unapei-conf/files:/var/www/html/sites/default/files" \
         -v "${_PWD}/../unapei-conf/services.yml:/var/www/html/sites/default/services.yml" \
         -v "${_PWD}/../unapei-conf/development.services.yml:/var/www/html/sites/default/development.services.yml" \
         -v "${_PWD}/../unapei-conf/settings.php:/var/www/html/sites/default/settings.php" \
