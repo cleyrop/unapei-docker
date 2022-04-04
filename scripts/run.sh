@@ -36,14 +36,14 @@ docker run -it --rm \
         --name codatalab \
         --stop-signal SIGTERM \
         -p 127.0.0.1:8080:80/tcp \
-        -v "${_PWD}/../unapei-web/web:/var/www/html" \
-        -v "${_PWD}/../unapei-conf/files:/var/www/html/sites/default/files" \
-        -v "${_PWD}/../unapei-conf/services.yml:/var/www/html/sites/default/services.yml" \
-        -v "${_PWD}/../unapei-conf/development.services.yml:/var/www/html/sites/default/development.services.yml" \
-        -v "${_PWD}/../unapei-conf/settings.php:/var/www/html/sites/default/settings.php" \
-        -v "${_PWD}/../unapei-conf/settings.local.php:/var/www/html/sites/default/settings.local.php" \
+        -v "${_PWD}/../unapei-web/web:/var/www/web" \
+        -v "${_PWD}/../unapei-conf/files:/var/www/web/sites/default/files" \
+        -v "${_PWD}/../unapei-conf/services.yml:/var/www/web/sites/default/services.yml" \
+        -v "${_PWD}/../unapei-conf/development.services.yml:/var/www/web/sites/default/development.services.yml" \
+        -v "${_PWD}/../unapei-conf/settings.php:/var/www/web/sites/default/settings.php" \
+        -v "${_PWD}/../unapei-conf/settings.local.php:/var/www/web/sites/default/settings.local.php" \
         -v "${_PWD}/../unapei-ssh/id_rsa:/var/www.ssh/id_rsa" \
         -v "${_PWD}/../unapei-ssh/id_rsa.pub:/var/www/.ssh/id_rsa.pub" \
         "${CONFIG[name]}:${CONFIG[version]}"
 
-#        -v "/home/finalspy/linux-Codata/unapei/conf/sites.php:/var/www/html/sites/sites.php" \
+#        -v "/home/finalspy/linux-Codata/unapei/conf/sites.php:/var/www/web/sites/sites.php" \
