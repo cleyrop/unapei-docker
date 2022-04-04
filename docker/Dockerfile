@@ -15,8 +15,8 @@ RUN apt-get update -qq && apt-get install -yqq  --no-install-recommends \
     && curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
     && chmod +x /usr/local/bin/composer \
-    && chown www-data:www-data /var/www \
-    && cp /usr/local/etc/php/php.ini-development php.ini 
+    && chown www-data:www-data /var/www 
+#    && cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
 
 ADD resources/versions.sh /usr/local/bin/versions.sh
 
@@ -28,18 +28,14 @@ ADD resources/conf.d/max-input-vars-php.ini /usr/local/etc/php/conf.d/max-input-
 ADD resources/conf.d/memory-limit-php.ini /usr/local/etc/php/conf.d/memory-limit-php.ini
 ADD resources/conf.d/upload-max-filesize-php.ini /usr/local/etc/php/conf.d/upload-max-filesize-php.ini
 
-ADD resources/composer.json /var/www/composer.json
-RUN chown www-data:www-data /var/www/composer.json
+ADD resources/composer.json /var/www/html/composer.json
+RUN chown www-data:www-data /var/www/html/composer.json
 
 USER www-data
 
-WORKDIR /var/www
 RUN mkdir -p /var/www/.ssh \
-    mkdir -p /var/www/.ssh \
     && composer install \
     && composer update
-
-WORKDIR /var/www/web
 
 STOPSIGNAL SIGTERM
 

@@ -3,9 +3,9 @@
 echo -e "\n\t\tHello CapFalc"
 
 echo -e "\nComposer Install"
-cd /var/www && composer install
+cd /var/www/html && composer install
 echo -e "\nComposer Update"
-cd /var/www && composer update
+cd /var/www/html && composer update
 echo -e "\nLaunch previous entrypoint"
 docker-php-entrypoint
 echo -e "\nLaunch apache"

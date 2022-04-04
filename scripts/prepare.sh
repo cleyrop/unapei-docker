@@ -41,19 +41,22 @@ cd "${_PWD}/../unapei.orig" \
     && check "git rev-parse --abbrev-ref HEAD | grep develop" "git switch develop" \
     && git pull -q
 echo -e "\n\tcopy to shared folder"
-mkdir -p "${_PWD}/../unapei-web" \
-    && sudo -p "" -S bash -c "cp -f ./composer.lock  \"${_PWD}/../unapei-web/\"" <<< ${PASS} \
-    && sudo -p "" -S bash -c "cp -f ./composer.json \"${_PWD}/../unapei-web/\"" <<< ${PASS} \
-    && sudo -p "" -S bash -c "cp -rf ./web \"${_PWD}/../unapei-web/\"" <<< ${PASS} \
-    && sudo -p "" -S bash -c "chown -R www-data:www-data \"${_PWD}/../unapei-web\"" <<< ${PASS} \
-    && sudo -p "" -S bash -c "chmod -R g+w \"${_PWD}/../unapei-web\"" <<< ${PASS}
+sudo -p "" -S bash -c "rm -rf \"${_PWD}/../unapei-web\"" <<< ${PASS}
+mkdir -p "${_PWD}/../unapei-web"
+sudo -p "" -S bash -c "cp -f ./composer.lock  \"${_PWD}/../unapei-web\"" <<< ${PASS}
+sudo -p "" -S bash -c "cp -f ./composer.lock  \"${_PWD}/docker/resources/composer.lock\"" <<< ${PASS}
+sudo -p "" -S bash -c "cp -f ./composer.json \"${_PWD}/../unapei-web\"" <<< ${PASS}
+sudo -p "" -S bash -c "cp -f ./composer.json \"${_PWD}/docker/resources/composer.json\"" <<< ${PASS}
+sudo -p "" -S bash -c "cp -rf ./web \"${_PWD}/../unapei-web\"" <<< ${PASS}
+sudo -p "" -S bash -c "chown -R www-data:www-data \"${_PWD}/../unapei-web\"" <<< ${PASS}
+sudo -p "" -S bash -c "chmod -R g=u \"${_PWD}/../unapei-web\"" <<< ${PASS}
 
 #rm -rf "${_PWD}/../unapei-web/web/sites/default.orig"
 #mv "${_PWD}/../unapei-web/web/sites/default" "${_PWD}/../unapei-web/web/sites/default.orig"     
-mv "${_PWD}/../unapei-web/web/sites/unapei.fr" "${_PWD}/../unapei-web/web/sites/default"
+#mv "${_PWD}/../unapei-web/web/sites/unapei.fr" "${_PWD}/../unapei-web/web/sites/default"
 #sed -i 's:sites/unapei.fr/:sites/default/:g' *
-cd "${_PWD}/../unapei-web/web/sites/default" || exit
-find . -type f -name "*" -print0 | xargs -0 sed -i 's:sites/unapei.fr/:sites/default/:g'
+#cd "${_PWD}/../unapei-web/web/sites/default" || exit
+#find . -type f -name "*" -print0 | xargs -0 sed -i 's:sites/unapei.fr/:sites/default/:g'
 cd "${_PWD}" || exit
 
 
@@ -64,17 +67,25 @@ if [ ! -d "${_PWD}/../unapei-conf" ] || \
     [ ! -f "${_PWD}/../unapei-conf/development.services.yml" ] || \
     [ ! -f "${_PWD}/../unapei-conf/sites.php" ]; then 
     echo "Some conf files are missing !"
+else
+    cd "${_PWD}/../unapei-conf/" || exit
+
+    cp "${_PWD}/../unapei-conf/settings.php" "${_PWD}/../unapei-web/web/sites/unapei.fr/settings.php"
+    cp "${_PWD}/../unapei-conf/settings.local.php" "${_PWD}/../unapei-web/web/sites/unapei.fr/settings.local.php"
+
+    cp "${_PWD}/../unapei-conf/services.yml" "${_PWD}/../unapei-web/web/sites/unapei.fr/services.yml"
+    cp "${_PWD}/../unapei-conf/development.services.yml" "${_PWD}/../unapei-web/web/sites/unapei.fr/development.services.yml"
+
+    cp "${_PWD}/../unapei-conf/sites.php" "${_PWD}/../unapei-web/web/sites/sites.php"
+    
+    cd "${_PWD}/../unapei-web/" || exit
+    sudo -p "" -S bash -c "chown -R www-data:www-data ." <<< ${PASS}
+    #sudo -p "" -S bash -c "chmod u+w -R ." <<< ${PASS}
+    #sudo -p "" -S bash -c "chmod g=u -R ." <<< ${PASS}
 fi
 ### check conf
-cd "${_PWD}/../unapei-conf/"
-sudo -p "" -S bash -c "chown -R www-data:www-data ." <<< ${PASS}
-sudo -p "" -S bash -c "chmod g=u -R ." <<< ${PASS}
-pwd
-ls -al 
 
-
-cd "${_PWD}/../unapei-conf" || exit
-find . -type f -name "*" -print0 | xargs -0 sed -i 's:sites/unapei.fr/:sites/default/:g'
+#find . -type f -name "*" -print0 | xargs -0 sed -i 's:sites/unapei.fr/:sites/default/:g'
 
 #echo -e "\n\tCONF DIR"
 #ls -al "${_PWD}/../unapei-conf/"
