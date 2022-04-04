@@ -16,13 +16,23 @@ RUN apt-get update -qq && apt-get install -yqq  --no-install-recommends \
     && chmod +x /usr/local/bin/composer \
     && chown www-data:www-data /var/www
 
-USER www-data
-
 ADD resources/versions.sh /usr/local/bin/versions.sh
 ADD resources/composer.json /var/www/composer.json
+RUN chown www-data:www-data /var/www/composer.json
 
+USER www-data
 
 WORKDIR /var/www
-RUN composer install \
+RUN mkdir /var/www/.ssh \
+    && composer install \
     && composer update
+
+#RUN useradd -m codatalab \
+#    && usermod -a -G www-data codatalab
+
 WORKDIR /var/www/html
+
+STOPSIGNAL SIGTERM
+
+ADD resources/entrypoint /entrypoint
+ENTRYPOINT [ "/entrypoint" ]

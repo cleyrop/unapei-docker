@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo -e "\n\t\tHello CapFalc"
+whoami
+pwd
+echo -e "\nComposer Install"
+cd /var/www && composer install
+echo -e "\nComposer Update"
+cd /var/www && composer update
+echo -e "\nLaunch previous entrypoint"
+apache2-foreground
