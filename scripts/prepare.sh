@@ -78,14 +78,16 @@ if [ ! -d "${_PWD}/../unapei-conf" ] || \
 else
     cd "${_PWD}/../unapei-conf/" || exit
 
-    cp "${_PWD}/../unapei-conf/settings.php" "${_PWD}/../unapei-web/web/sites/unapei.fr/settings.php"
-    cp "${_PWD}/../unapei-conf/settings.local.php" "${_PWD}/../unapei-web/web/sites/unapei.fr/settings.local.php"
+    cp "settings.php" "${_PWD}/../unapei-web/web/sites/unapei.fr/settings.php"
+    cp "settings.local.php" "${_PWD}/../unapei-web/web/sites/unapei.fr/settings.local.php"
 
-    cp "${_PWD}/../unapei-conf/services.yml" "${_PWD}/../unapei-web/web/sites/unapei.fr/services.yml"
-    cp "${_PWD}/../unapei-conf/development.services.yml" "${_PWD}/../unapei-web/web/sites/unapei.fr/development.services.yml"
+    cp "services.yml" "${_PWD}/../unapei-web/web/sites/unapei.fr/services.yml"
+    cp "development.services.yml" "${_PWD}/../unapei-web/web/sites/unapei.fr/development.services.yml"
 
-#    cp "${_PWD}/../unapei-conf/sites.php" "${_PWD}/../unapei-web/web/sites/sites.php"
-    
+#    cp "sites.php" "${_PWD}/../unapei-web/web/sites/sites.php"
+
+    cp -rf "files" "${_PWD}/../unapei-web/web/sites/unapei.fr/files"
+
     cd "${_PWD}/../unapei-web/" || exit
     rm -rf default
     mv web/sites/unapei.fr web/sites/default

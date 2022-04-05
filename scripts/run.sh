@@ -32,11 +32,11 @@ read_config "${_DIR}/../config/image.properties"
 #docker run -it --rm --name capfalc --entrypoint bash "${CONFIG[name]}":"${CONFIG[version]}"
 
 docker run -it --rm \
-        --name codatalab \
+        --name codatalab2 \
         --network capfalc \
         --stop-signal SIGTERM \
         -u www-data \
-        -p 127.0.0.1:8080:80/tcp \
+        -p 127.0.0.1:8081:80/tcp \
         -v "${_PWD}/../unapei-web/web/sites:/var/www/html/sites" \
         -v "${_PWD}/../unapei-web/web/libraries:/var/www/html/libraries" \
         "${CONFIG[name]}:${CONFIG[version]}"
