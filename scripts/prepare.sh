@@ -37,6 +37,7 @@ echo -e "\n\tcheckout latest web"
 if [ ! -d "${_PWD}/../unapei.orig" ]; then
     git clone git@github.com:subskill/unapei.git "${_PWD}/../unapei.orig"
 fi
+
 echo -e "\n\tcheck branch"
 #in some case index is lost so force rebuild then check branch to change if necessary then pull
 cd "${_PWD}/../unapei.orig" \
@@ -44,6 +45,7 @@ cd "${_PWD}/../unapei.orig" \
     && git reset \
     && check "git rev-parse --abbrev-ref HEAD | grep develop" "git switch develop" \
     && git pull -q
+
 echo -e "\n\tcopy to web folder"
 sudo -p "" -S bash -c "rm -rf \"${_PWD}/../unapei-web\"" <<< "${PASS}"
 mkdir -p "${_PWD}/../unapei-web"
@@ -51,9 +53,7 @@ sudo -p "" -S bash -c "cp -f ./composer.lock  \"${_PWD}/../unapei-web\"" <<< "${
 sudo -p "" -S bash -c "cp -f ./composer.lock  \"${_PWD}/docker/resources/composer.lock\"" <<< "${PASS}"
 
 sudo -p "" -S bash -c "cp -f ./composer.json \"${_PWD}/../unapei-web\"" <<< "${PASS}"
-#sed -i 's:web/:html/:g' "${_PWD}/../unapei-web/composer.json"
 sudo -p "" -S bash -c "cp -f ./composer.json \"${_PWD}/docker/resources/composer.json\"" <<< "${PASS}"
-#sed -i 's:web/:html/:g' "${_PWD}/docker/resources/composer.json"
 
 sudo -p "" -S bash -c "cp -rf ./web \"${_PWD}/../unapei-web\"" <<< "${PASS}"
 
@@ -85,26 +85,15 @@ else
     cp "services.yml" "${_PWD}/../unapei-web/web/sites/unapei.fr/services.yml"
     cp "development.services.yml" "${_PWD}/../unapei-web/web/sites/unapei.fr/development.services.yml"
 
-#    cp "sites.php" "${_PWD}/../unapei-web/web/sites/sites.php"
+    cp "sites.php" "${_PWD}/../unapei-web/web/sites/sites.php"
 
     cp -rf "files" "${_PWD}/../unapei-web/web/sites/unapei.fr/files"
 
     cd "${_PWD}/../unapei-web/" || exit
 
-    echo -e "\n\t\tchange to default"
-    rm -rf default
-    mv web/sites/unapei.fr web/sites/default
-    ls -al web/sites/default
     sudo -p "" -S bash -c "chown -R www-data:www-data ." <<< "${PASS}"
     sudo -p "" -S bash -c "chmod u+w -R ." <<< "${PASS}"
     sudo -p "" -S bash -c "chmod g=u -R ." <<< "${PASS}"
-    ls -al web/sites/default
-    find . -type f -name "*" -print0 | xargs -0 sed -i 's:sites/unapei.fr/:sites/default/:g'
-    ls -al web/sites/default
-    sudo -p "" -S bash -c "chown -R www-data:www-data ." <<< "${PASS}"
-    sudo -p "" -S bash -c "chmod u+w -R ." <<< "${PASS}"
-    sudo -p "" -S bash -c "chmod g=u -R ." <<< "${PASS}"
-    ls -al web/sites/default
 
 fi
 
