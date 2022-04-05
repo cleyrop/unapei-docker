@@ -51,9 +51,9 @@ sudo -p "" -S bash -c "cp -f ./composer.lock  \"${_PWD}/../unapei-web\"" <<< "${
 sudo -p "" -S bash -c "cp -f ./composer.lock  \"${_PWD}/docker/resources/composer.lock\"" <<< "${PASS}"
 
 sudo -p "" -S bash -c "cp -f ./composer.json \"${_PWD}/../unapei-web\"" <<< "${PASS}"
-sed -i 's:web/:/var/www/html/:g' "${_PWD}/../unapei-web/composer.json"
+sed -i 's:web/:html/:g' "${_PWD}/../unapei-web/composer.json"
 sudo -p "" -S bash -c "cp -f ./composer.json \"${_PWD}/docker/resources/composer.json\"" <<< "${PASS}"
-sed -i 's:web/:/var/www/html/:g' "${_PWD}/docker/resources/composer.json"
+sed -i 's:web/:html/:g' "${_PWD}/docker/resources/composer.json"
 
 sudo -p "" -S bash -c "cp -rf ./web \"${_PWD}/../unapei-web\"" <<< "${PASS}"
 sudo -p "" -S bash -c "chown -R www-data:www-data \"${_PWD}/../unapei-web\"" <<< "${PASS}"
