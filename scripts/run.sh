@@ -33,13 +33,14 @@ read_config "${_DIR}/../config/image.properties"
 
 docker run -it --rm \
         --name codatalab \
+        --network capfalc \
         --stop-signal SIGTERM \
         -u www-data \
         -p 127.0.0.1:8080:80/tcp \
         -v "${_PWD}/../unapei-web/web/sites:/var/www/html/sites" \
         "${CONFIG[name]}:${CONFIG[version]}"
 
-#        --network capfalc \
+#        
 
 #        -v "${_PWD}/../unapei-ssh/id_rsa:/var/www.ssh/id_rsa" \
 #        -v "${_PWD}/../unapei-ssh/id_rsa.pub:/var/www/.ssh/id_rsa.pub" \

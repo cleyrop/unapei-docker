@@ -6,10 +6,13 @@ _DIR=$(dirname "${0}")
 #shellcheck source=functions/check.sh
 source "${_DIR}/functions/check.sh"
 
-# Read passwd for sudo when necessary
-echo -n "Please enter the password for sudo commands : "
-read -s PASS
-echo 
+if [ -z ${PASS+x} ]; then
+    # Read passwd for sudo when necessary
+    echo -n "Please enter the password for sudo commands : "
+    read -rs PASS
+    echo 
+    export PASS
+fi
 
 #TODO check if sudo password is correct else display error and exit 
 
@@ -26,7 +29,7 @@ echo -e "***************************************\n\n"
 echo -e "\n\ttest if www-data (33) user/group exists and if curent user is memberOf"
 checkUser 33
 checkGroup 33
-checkMemberOfWWW $(whoami) www-data
+checkMemberOfWWW "$(whoami)" www-data
 
 ### check sources & conf
 echo -e "\n\tcheckout latest web"
@@ -41,15 +44,15 @@ cd "${_PWD}/../unapei.orig" \
     && check "git rev-parse --abbrev-ref HEAD | grep develop" "git switch develop" \
     && git pull -q
 echo -e "\n\tcopy to shared folder"
-sudo -p "" -S bash -c "rm -rf \"${_PWD}/../unapei-web\"" <<< ${PASS}
+sudo -p "" -S bash -c "rm -rf \"${_PWD}/../unapei-web\"" <<< "${PASS}"
 mkdir -p "${_PWD}/../unapei-web"
-sudo -p "" -S bash -c "cp -f ./composer.lock  \"${_PWD}/../unapei-web\"" <<< ${PASS}
-sudo -p "" -S bash -c "cp -f ./composer.lock  \"${_PWD}/docker/resources/composer.lock\"" <<< ${PASS}
-sudo -p "" -S bash -c "cp -f ./composer.json \"${_PWD}/../unapei-web\"" <<< ${PASS}
-sudo -p "" -S bash -c "cp -f ./composer.json \"${_PWD}/docker/resources/composer.json\"" <<< ${PASS}
-sudo -p "" -S bash -c "cp -rf ./web \"${_PWD}/../unapei-web\"" <<< ${PASS}
-sudo -p "" -S bash -c "chown -R www-data:www-data \"${_PWD}/../unapei-web\"" <<< ${PASS}
-sudo -p "" -S bash -c "chmod -R g=u \"${_PWD}/../unapei-web\"" <<< ${PASS}
+sudo -p "" -S bash -c "cp -f ./composer.lock  \"${_PWD}/../unapei-web\"" <<< "${PASS}"
+sudo -p "" -S bash -c "cp -f ./composer.lock  \"${_PWD}/docker/resources/composer.lock\"" <<< "${PASS}"
+sudo -p "" -S bash -c "cp -f ./composer.json \"${_PWD}/../unapei-web\"" <<< "${PASS}"
+sudo -p "" -S bash -c "cp -f ./composer.json \"${_PWD}/docker/resources/composer.json\"" <<< "${PASS}"
+sudo -p "" -S bash -c "cp -rf ./web \"${_PWD}/../unapei-web\"" <<< "${PASS}"
+sudo -p "" -S bash -c "chown -R www-data:www-data \"${_PWD}/../unapei-web\"" <<< "${PASS}"
+sudo -p "" -S bash -c "chmod -R g=u \"${_PWD}/../unapei-web\"" <<< "${PASS}"
 
 #rm -rf "${_PWD}/../unapei-web/web/sites/default.orig"
 #mv "${_PWD}/../unapei-web/web/sites/default" "${_PWD}/../unapei-web/web/sites/default.orig"     
@@ -76,16 +79,19 @@ else
     cp "${_PWD}/../unapei-conf/services.yml" "${_PWD}/../unapei-web/web/sites/unapei.fr/services.yml"
     cp "${_PWD}/../unapei-conf/development.services.yml" "${_PWD}/../unapei-web/web/sites/unapei.fr/development.services.yml"
 
-    cp "${_PWD}/../unapei-conf/sites.php" "${_PWD}/../unapei-web/web/sites/sites.php"
+#    cp "${_PWD}/../unapei-conf/sites.php" "${_PWD}/../unapei-web/web/sites/sites.php"
     
     cd "${_PWD}/../unapei-web/" || exit
-    sudo -p "" -S bash -c "chown -R www-data:www-data ." <<< ${PASS}
-    #sudo -p "" -S bash -c "chmod u+w -R ." <<< ${PASS}
-    #sudo -p "" -S bash -c "chmod g=u -R ." <<< ${PASS}
+    rm -rf default
+    mv web/sites/unapei.fr web/sites/default
+    sudo -p "" -S bash -c "chown -R www-data:www-data ." <<< "${PASS}"
+    find . -type f -name "*" -print0 | xargs -0 sed -i 's:sites/unapei.fr/:sites/default/:g'
+    sudo -p "" -S bash -c "chmod u+w -R ." <<< "${PASS}"
+    sudo -p "" -S bash -c "chmod g=u -R ." <<< "${PASS}"
 fi
 ### check conf
 
-#find . -type f -name "*" -print0 | xargs -0 sed -i 's:sites/unapei.fr/:sites/default/:g'
+
 
 #echo -e "\n\tCONF DIR"
 #ls -al "${_PWD}/../unapei-conf/"
