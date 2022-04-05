@@ -28,11 +28,12 @@ ADD resources/conf.d/max-input-vars-php.ini /usr/local/etc/php/conf.d/max-input-
 ADD resources/conf.d/memory-limit-php.ini /usr/local/etc/php/conf.d/memory-limit-php.ini
 ADD resources/conf.d/upload-max-filesize-php.ini /usr/local/etc/php/conf.d/upload-max-filesize-php.ini
 
-ADD resources/composer.json /var/www/html/composer.json
-RUN chown www-data:www-data /var/www/html/composer.json
+ADD resources/composer.json /var/www/composer.json
+RUN chown www-data:www-data /var/www/composer.json
 
 USER www-data
 
+WORKDIR /var/www
 RUN mkdir -p /var/www/.ssh \
     && composer install \
     && composer update

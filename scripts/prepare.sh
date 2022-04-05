@@ -32,6 +32,7 @@ checkGroup 33
 checkMemberOfWWW "$(whoami)" www-data
 
 ### check sources & conf
+sudo -p "" -S bash -c "rm -rf \"${_PWD}/../unapei.orig\"" <<< "${PASS}"
 echo -e "\n\tcheckout latest web"
 if [ ! -d "${_PWD}/../unapei.orig" ]; then
     git clone git@github.com:subskill/unapei.git "${_PWD}/../unapei.orig"
@@ -48,8 +49,12 @@ sudo -p "" -S bash -c "rm -rf \"${_PWD}/../unapei-web\"" <<< "${PASS}"
 mkdir -p "${_PWD}/../unapei-web"
 sudo -p "" -S bash -c "cp -f ./composer.lock  \"${_PWD}/../unapei-web\"" <<< "${PASS}"
 sudo -p "" -S bash -c "cp -f ./composer.lock  \"${_PWD}/docker/resources/composer.lock\"" <<< "${PASS}"
+
 sudo -p "" -S bash -c "cp -f ./composer.json \"${_PWD}/../unapei-web\"" <<< "${PASS}"
+sed -i 's:web/:/var/www/html/:g' "${_PWD}/../unapei-web/composer.json"
 sudo -p "" -S bash -c "cp -f ./composer.json \"${_PWD}/docker/resources/composer.json\"" <<< "${PASS}"
+sed -i 's:web/:/var/www/html/:g' "${_PWD}/docker/resources/composer.json"
+
 sudo -p "" -S bash -c "cp -rf ./web \"${_PWD}/../unapei-web\"" <<< "${PASS}"
 sudo -p "" -S bash -c "chown -R www-data:www-data \"${_PWD}/../unapei-web\"" <<< "${PASS}"
 sudo -p "" -S bash -c "chmod -R g=u \"${_PWD}/../unapei-web\"" <<< "${PASS}"
@@ -69,7 +74,7 @@ if [ ! -d "${_PWD}/../unapei-conf" ] || \
     [ ! -f "${_PWD}/../unapei-conf/services.yml" ] || \
     [ ! -f "${_PWD}/../unapei-conf/development.services.yml" ] || \
     [ ! -f "${_PWD}/../unapei-conf/sites.php" ]; then 
-    echo "Some conf files are missing !"
+    echo "Some conf files are missing !" && exit
 else
     cd "${_PWD}/../unapei-conf/" || exit
 
@@ -86,8 +91,8 @@ else
     mv web/sites/unapei.fr web/sites/default
     sudo -p "" -S bash -c "chown -R www-data:www-data ." <<< "${PASS}"
     find . -type f -name "*" -print0 | xargs -0 sed -i 's:sites/unapei.fr/:sites/default/:g'
-    sudo -p "" -S bash -c "chmod u+w -R ." <<< "${PASS}"
-    sudo -p "" -S bash -c "chmod g=u -R ." <<< "${PASS}"
+    #sudo -p "" -S bash -c "chmod u+w -R ." <<< "${PASS}"
+    #sudo -p "" -S bash -c "chmod g=u -R ." <<< "${PASS}"
 fi
 ### check conf
 

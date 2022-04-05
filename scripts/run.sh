@@ -38,9 +38,8 @@ docker run -it --rm \
         -u www-data \
         -p 127.0.0.1:8080:80/tcp \
         -v "${_PWD}/../unapei-web/web/sites:/var/www/html/sites" \
+        -v "${_PWD}/../unapei-web/web/libraries:/var/www/html/libraries" \
         "${CONFIG[name]}:${CONFIG[version]}"
-
-#        
 
 #        -v "${_PWD}/../unapei-ssh/id_rsa:/var/www.ssh/id_rsa" \
 #        -v "${_PWD}/../unapei-ssh/id_rsa.pub:/var/www/.ssh/id_rsa.pub" \
