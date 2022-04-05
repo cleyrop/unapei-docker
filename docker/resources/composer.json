@@ -98,35 +98,35 @@
         },
         "drupal-scaffold": {
             "locations": {
-                "web-root": "html/"
+                "web-root": "web/"
             }
         },
         "installer-paths": {
-            "html/core": [
+            "web/core": [
                 "type:drupal-core"
             ],
-            "html/libraries/{$name}": [
+            "web/libraries/{$name}": [
                 "type:drupal-library"
             ],
-            "html/modules/contrib/{$name}": [
+            "web/modules/contrib/{$name}": [
                 "type:drupal-module"
             ],
-            "html/profiles/contrib/{$name}": [
+            "web/profiles/contrib/{$name}": [
                 "type:drupal-profile"
             ],
-            "html/themes/contrib/{$name}": [
+            "web/themes/contrib/{$name}": [
                 "type:drupal-theme"
             ],
             "drush/Commands/contrib/{$name}": [
                 "type:drupal-drush"
             ],
-            "html/modules/custom/{$name}": [
+            "web/modules/custom/{$name}": [
                 "type:drupal-custom-module"
             ],
-            "html/profiles/custom/{$name}": [
+            "web/profiles/custom/{$name}": [
                 "type:drupal-custom-profile"
             ],
-            "html/themes/custom/{$name}": [
+            "web/themes/custom/{$name}": [
                 "type:drupal-custom-theme"
             ]
         },

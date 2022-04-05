@@ -15,7 +15,9 @@ RUN apt-get update -qq && apt-get install -yqq  --no-install-recommends \
     && curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
     && chmod +x /usr/local/bin/composer \
-    && chown www-data:www-data /var/www 
+    && chown www-data:www-data /var/www \
+    && sed -i 's:DocumentRoot /var/www/html:DocumentRoot /var/www/web:g' /etc/apache2/sites-available/000-default.conf \
+    && sed -i 's:DocumentRoot /var/www/html:DocumentRoot /var/www/web:g' /etc/apache2/sites-available/default-ssl.conf
 #    && cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
 
 ADD resources/versions.sh /usr/local/bin/versions.sh
