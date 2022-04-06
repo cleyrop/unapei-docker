@@ -10,15 +10,16 @@ This application should be able to run on a dedicated Onyxia SSPCloud instance t
 
 ## Docker Image
 
-The image is publicly available on (DockerHub)[https://hub.docker.com/repository/docker/cleyrop/capfalc].
+The image is publicly available on (DockerHub)[https://hub.docker.com/repository/docker/cleyrop/codatalab-unapei].
 
 ### Build
 
 To build this image, once you've clone the code, go to the `scripts` directory and just run :
 
 ````
-./build.sh
+./build.sh [--no-cache]
 ````
+`[--no-cache]` option can be passed to force build without cache.
 
 ### Test
 
@@ -50,3 +51,9 @@ Deployment to dockerhub can be done, by running the following command from the `
 ./deploy.sh
 ```
 
+### ALL
+
+To run all commands in a raw, use : 
+```
+./all.sh [--no-cache]
+```
