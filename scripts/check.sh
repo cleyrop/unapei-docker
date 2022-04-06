@@ -1,9 +1,14 @@
 #!/bin/bash
 
 _DIR=$(dirname "${0}")
+
 #shellcheck source=functions/config.sh
 source "${_DIR}/functions/config.sh"
 read_config "${_DIR}/../config/image.properties"
+
+echo -e "\n***************************************"
+echo -e "\tCheck Docker image CapFalc !"
+echo -e "***************************************\n\n"
 
 if ! command -v container-structure-test &> /dev/null
 then
@@ -12,4 +17,4 @@ fi
 container-structure-test test \
     --driver docker \
     --image "${CONFIG[name]}:${CONFIG[version]}" \
-    --config ../docker/misc/test_image.yaml 
+    --config "${_DIR}/../docker/misc/test_image.yaml"

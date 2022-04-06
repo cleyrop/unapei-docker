@@ -9,8 +9,7 @@ function check() {
     echo -en "\t\tTesting [${1}]"
     RESULT=$(eval "${1}")
     if [ ! $? -eq 0 ]; then
-        #echo "RESULT [${RESULT}]"
-        eval $2 # > /dev/null 2>&1
+        eval $2
     else 
         echo -e "\t\033[32m ✔ OK\033[0m"
     fi

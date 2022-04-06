@@ -20,11 +20,11 @@ commandTests:
 
   - name: "Whoami"
     command: "whoami"
-    expectedOutput: ["codatalab"]
+    expectedOutput: ["www-data"]
 
   - name: "Workdir"
     command: "pwd"
-    expectedOutput: ["/home/codatalab"]
+    expectedOutput: ["/var/www"]
 
   - name: "PHP version"
     command: "php"
@@ -38,7 +38,7 @@ commandTests:
       - -c
       - php --ri xml | grep -i xml
     exitCode: 0
-    expectedOutput: ["XML Support => active", "libxml2 Version => 2.9.10"]
+    expectedOutput: ["XML Support => active", "libxml2 Version => 2.9"]
 
   - name: "GD extension"
     command: "bash"
@@ -52,7 +52,7 @@ commandTests:
     command: "openssl"
     args: ["version"]
     exitCode: 0
-    expectedOutput: ["OpenSSL 1.1.1k  25 Mar 2021"]
+    expectedOutput: ["OpenSSL 1.1"]
 
   - name: "OpenSSL Extension"
     command: "bash"
@@ -60,7 +60,7 @@ commandTests:
       - -c
       - echo '<?php phpinfo(); ?>' | php 2>&1 | grep -vi command | grep -i ssl
     exitCode: 0
-    expectedOutput: ["SSL => Yes", "OpenSSL support => enabled", "OpenSSL 1.1.1k  25 Mar 2021"]
+    expectedOutput: ["SSL => Yes", "OpenSSL support => enabled", "OpenSSL 1.1"]
 
   - name: "JSON extension"
     command: "bash"
@@ -76,7 +76,7 @@ commandTests:
       - -c
       - php --ri curl | grep -i curl
     exitCode: 0
-    expectedOutput: ["cURL support => enabled", "cURL Information => 7.74.0"]
+    expectedOutput: ["cURL support => enabled", "cURL Information => 7.74"]
 
   - name: "mbstring extension"
     command: "bash"
@@ -84,7 +84,7 @@ commandTests:
       - -c
       - php --ri mbstring
     exitCode: 0
-    expectedOutput: ["Multibyte Support => enabled", "libmbfl version => 1.3.2"]
+    expectedOutput: ["Multibyte Support => enabled", "libmbfl version => 1.3"]
 
   - name: "ssh2 extension"
     command: "bash"
@@ -92,7 +92,7 @@ commandTests:
       - -c
       - php --ri ssh2
     exitCode: 0
-    expectedOutput: ["SSH2 support => enabled", "extension version => 1.3.1", "libssh2 version => 1.9.0"]
+    expectedOutput: ["SSH2 support => enabled", "extension version => 1.3", "libssh2 version => 1.9"]
 
 
 #memrory min 256M

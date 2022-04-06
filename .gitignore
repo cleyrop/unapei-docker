@@ -1,3 +1,4 @@
 logs
 test.sh
 docker/resources/composer.lock
+docker/resources/www/
