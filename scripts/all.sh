@@ -7,5 +7,5 @@ _DIR=$(dirname "${0}")
 "${_DIR}"/build.sh ${1} && \
 "${_DIR}"/check.sh && \
 "${_DIR}"/check_versions.sh && \
+"${_DIR}"/deploy.sh && \
 "${_DIR}"/run.sh
-#./deploy.sh && \
