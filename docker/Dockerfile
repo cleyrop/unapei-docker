@@ -18,36 +18,25 @@ RUN apt-get update -qq && apt-get install -yqq  --no-install-recommends \
     && chown www-data:www-data /var/www \
     && sed -i 's:DocumentRoot /var/www/html:DocumentRoot /var/www/web:g' /etc/apache2/sites-available/000-default.conf \
     && sed -i 's:DocumentRoot /var/www/html:DocumentRoot /var/www/web:g' /etc/apache2/sites-available/default-ssl.conf
-#    && cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
 
 ADD resources/versions.sh /usr/local/bin/versions.sh
 
 ADD resources/conf.d/ /usr/local/etc/php/conf.d/
 
 ADD resources/www/ /var/www/
+ADD resources/sites/ /var/www/web/sites/
 
 RUN chown -R www-data:www-data /var/www/ \
     && chmod -R u+w /var/www/ \
     && chmod -R g=u /var/www/
 
-#ADD resources/conf.d/allow-url-open.ini /usr/local/etc/php/conf.d/allow-url-open.ini
-#ADD resources/conf.d/docker-php-memlimit.ini /usr/local/etc/php/conf.d/docker-php-memlimit.ini
-#ADD resources/conf.d/max-execution-time-php.ini /usr/local/etc/php/conf.d/max-execution-time-php.ini
-#ADD resources/conf.d/max-input-time-php.ini /usr/local/etc/php/conf.d/max-input-time-php.ini
-#ADD resources/conf.d/max-input-vars-php.ini /usr/local/etc/php/conf.d/max-input-vars-php.ini
-#ADD resources/conf.d/memory-limit-php.ini /usr/local/etc/php/conf.d/memory-limit-php.ini
-#ADD resources/conf.d/upload-max-filesize-php.ini /usr/local/etc/php/conf.d/upload-max-filesize-php.ini
-
-#ADD resources/composer.json /var/www/composer.json
-#RUN chown www-data:www-data /var/www/composer.json
-
 USER www-data
 
 WORKDIR /var/www
 RUN mkdir -p /var/www/.ssh \
-    && rm -rf /var/www/html
-#    && composer install \
-#    && composer update
+    && rm -rf /var/www/html \
+    && composer install \
+    && composer update
 
 STOPSIGNAL SIGTERM
 
