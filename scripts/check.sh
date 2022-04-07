@@ -6,9 +6,9 @@ _DIR=$(dirname "${0}")
 source "${_DIR}/functions/config.sh"
 read_config "${_DIR}/../config/image.properties"
 
-echo -e "\n***************************************"
-echo -e "\tCheck Docker image CapFalc !"
-echo -e "***************************************\n\n"
+echo -e "\n********************************************************************************"
+echo -e "\tCheck Docker image ${CONFIG[name]}:${CONFIG[version]} !"
+echo -e "********************************************************************************\n\n"
 
 if ! command -v container-structure-test &> /dev/null
 then

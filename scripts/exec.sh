@@ -6,4 +6,4 @@ _DIR=$(dirname "${0}")
 source "${_DIR}/functions/config.sh"
 read_config "${_DIR}/../config/image.properties"
 
-docker exec -it -u root codatalab bash 
+docker exec -it -u root "${CONFIG[container]}" bash 

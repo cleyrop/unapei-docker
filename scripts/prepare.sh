@@ -2,25 +2,29 @@
 _PWD=$(pwd)
 _DIR=$(dirname "${0}")
 
+#shellcheck source=functions/config.sh
+source "${_DIR}/functions/config.sh"
+read_config "${_DIR}/../config/image.properties"
+
 #shellcheck source=functions/check.sh
 source "${_DIR}/functions/check.sh"
 
-echo -e "\n***************************************"
-echo -e "\tPREPARE CapFalc !"
-echo -e "***************************************\n"
+echo -e "\n********************************************************************************"
+echo -e "\tPREPARE ${CONFIG[name]}:${CONFIG[version]} !"
+echo -e "********************************************************************************\n\n"
 
-### TODO check current tools
-# prerequisite :
-# - TODO git
-# - TODO docker
+# Check tools are installed
+check "git --version" "exit"
+check "docker --version" "exit"
 
-TARGET_WWW="${_PWD}/docker/resources/www"
+TARGET_WWW="${_PWD}/../docker/resources/www"
 
 echo -e "\n *\tCheckout latest web"
 rm -rf "${TARGET_WWW}"
 git clone --quiet --depth 1 -b develop git@github.com:cleyrop/unapei.git "${TARGET_WWW}"
+rm -rf "${TARGET_WWW}"/.git*
 
 echo -e "\n *\tCopy external files "
-cd "${_PWD}/../unapei-files/" || exit
-cp -rf files "${TARGET_WWW}/web/sites/unapei.fr/"
+cd "${_PWD}/../../unapei-files/" || exit
+cp -rf files "${TARGET_WWW}"/web/sites/unapei.fr/
 cd "${_PWD}" || exit

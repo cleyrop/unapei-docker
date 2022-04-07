@@ -6,12 +6,12 @@ _DIR=$(dirname "${0}")
 source "${_DIR}/functions/config.sh"
 read_config "${_DIR}/../config/image.properties"
 
-echo -e "\n***************************************"
-echo -e "\tRUN Docker image CapFalc !"
-echo -e "***************************************\n\n"
+echo -e "\n********************************************************************************"
+echo -e "\tRUN Docker image ${CONFIG[name]}:${CONFIG[version]} !"
+echo -e "********************************************************************************\n\n"
 
 docker run -it --rm \
-        --name codatalab \
+        --name ${CONFIG[container]} \
         -e DRUPAL_DATABASE_HOST \
         -e DRUPAL_DATABASE_PORT_NUMBER \
         -e DRUPAL_DATABASE_NAME \

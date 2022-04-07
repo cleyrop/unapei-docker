@@ -15,28 +15,20 @@ RUN apt-get update -qq && apt-get install -yqq  --no-install-recommends \
     && curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
     && chmod +x /usr/local/bin/composer \
-    && chown www-data:www-data /var/www \
     && sed -i 's:DocumentRoot /var/www/html:DocumentRoot /var/www/web:g' /etc/apache2/sites-available/000-default.conf \
     && sed -i 's:DocumentRoot /var/www/html:DocumentRoot /var/www/web:g' /etc/apache2/sites-available/default-ssl.conf
 
 ADD resources/versions.sh /usr/local/bin/versions.sh
-
 ADD resources/conf.d/ /usr/local/etc/php/conf.d/
+ADD resources/www/ /var/www-bak/
+ADD resources/sites/ /var/www-bak/web/sites/
 
-ADD resources/www/ /var/www/
-ADD resources/sites/ /var/www/web/sites/
-
-RUN chown -R www-data:www-data /var/www/ \
-    && chmod -R u+w /var/www/ \
-    && chmod -R g=u /var/www/
+RUN chown -R www-data:www-data /var/www \
+    && chown -R www-data:www-data /var/www-bak
 
 USER www-data
 
 WORKDIR /var/www
-RUN mkdir -p /var/www/.ssh \
-    && rm -rf /var/www/html \
-    && composer install \
-    && composer update
 
 STOPSIGNAL SIGTERM
 
