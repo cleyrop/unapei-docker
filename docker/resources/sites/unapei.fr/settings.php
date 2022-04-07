@@ -35,6 +35,6 @@ $databases['default']['default'] = array (
   'driver' => 'mysql',
 );
 $settings['trusted_host_patterns'] = array(
-  '^local-codatalab\.eu',
+  getenv("DRUPAL_TRUSTED_HOST_PATTERN"),
 );
 $config['shield.settings']['shield_enable'] = FALSE;
