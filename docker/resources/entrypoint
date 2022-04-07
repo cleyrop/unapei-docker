@@ -3,7 +3,8 @@
 echo -e "\n\t\tHello CapFalc"
 
 echo -e "\nMove sources to target directory /var/www"
-mv /var/www-bak/* /var/www/
+cp -rf /var/www-bak/* /var/www/
+rm -rf /var/www-bak 
 echo -e "\nComposer Install"
 cd /var/www && composer install
 echo -e "\nComposer Update"
