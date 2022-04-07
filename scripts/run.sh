@@ -19,5 +19,5 @@ docker run -it --rm \
         -e DRUPAL_DATABASE_PASSWORD \
         -e DRUPAL_SITE_URL_LABEL \
         -u www-data \
-        -p 127.0.0.1:8080:80/tcp \
+        -p 127.0.0.1:8080:8080/tcp \
         "${CONFIG[name]}:${CONFIG[version]}"

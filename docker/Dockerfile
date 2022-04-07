@@ -16,7 +16,11 @@ RUN apt-get update -qq && apt-get install -yqq  --no-install-recommends \
     && mv composer.phar /usr/local/bin/composer \
     && chmod +x /usr/local/bin/composer \
     && sed -i 's:DocumentRoot /var/www/html:DocumentRoot /var/www/web:g' /etc/apache2/sites-available/000-default.conf \
-    && sed -i 's:DocumentRoot /var/www/html:DocumentRoot /var/www/web:g' /etc/apache2/sites-available/default-ssl.conf
+    && sed -i 's:DocumentRoot /var/www/html:DocumentRoot /var/www/web:g' /etc/apache2/sites-available/default-ssl.conf \
+    && sed -i 's/<VirtualHost \*:80>/<VirtualHost \*:8080>/g' /etc/apache2/sites-available/000-default.conf \
+    && sed -i 's/Listen 80$/Listen 8080/g' /etc/apache2/ports.conf \
+    && sed -i 's/<VirtualHost _default_:443>/<VirtualHost _default_:8443>/g' /etc/apache2/sites-available/default-ssl.conf \
+    && sed -i 's/Listen 443$/Listen 8443/g' /etc/apache2/ports.conf
 
 ADD resources/versions.sh /usr/local/bin/versions.sh
 ADD resources/conf.d/ /usr/local/etc/php/conf.d/

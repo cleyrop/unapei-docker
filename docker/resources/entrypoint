@@ -2,9 +2,15 @@
 
 echo -e "\n\t\tHello CapFalc"
 
-echo -e "\nMove sources to target directory /var/www"
-cp -rf /var/www-bak/* /var/www/
-rm -rf /var/www-bak 
+cat /etc/apache2/sites-available/000-default.conf
+cat /etc/apache2/sites-available/default-ssl.conf 
+cat /etc/apache2/ports.conf
+
+CONTENT=$(find . -printf x | wc -c)
+if [ ! "$CONTENT" -gt 2 ]; then
+    echo -e "\nMove sources to target directory /var/www"
+    cp -rf /var/www-bak/* /var/www/
+fi
 echo -e "\nComposer Install"
 cd /var/www && composer install
 echo -e "\nComposer Update"
