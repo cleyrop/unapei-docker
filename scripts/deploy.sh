@@ -10,7 +10,10 @@ echo -e "\n*********************************************************************
 echo -e "\tDeploy docker image ${CONFIG[name]}:${CONFIG[version]} !"
 echo -e "********************************************************************************\n\n"
 
-docker logout
-read -s -p "Enter dockerhub password for Cleyrop :" PASS 
-docker login -u cleyrop -p "${PASS}"
+if [[ "manual" = "${1}" ]]; then
+    docker logout
+    read -s -p "Enter dockerhub password for Cleyrop :" PASS 
+    docker login -u cleyrop -p "${PASS}"
+fi
+
 docker push "${CONFIG[name]}:${CONFIG[version]}"
