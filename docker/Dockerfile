@@ -38,5 +38,5 @@ WORKDIR /var/www
 
 STOPSIGNAL SIGTERM
 
-ADD resources/entrypoint /entrypoint
+ADD ./resources/entrypoint /entrypoint
 ENTRYPOINT [ "/entrypoint" ]
