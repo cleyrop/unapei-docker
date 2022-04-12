@@ -23,10 +23,10 @@ RUN apt-get update -qq && apt-get install -yqq  --no-install-recommends \
     && sed -i 's/<VirtualHost _default_:443>/<VirtualHost _default_:8443>/g' /etc/apache2/sites-available/default-ssl.conf \
     && sed -i 's/Listen 443$/Listen 8443/g' /etc/apache2/ports.conf
 
-ADD ./resources/versions.sh /usr/local/bin/versions.sh
-ADD ./resources/conf.d/ /usr/local/etc/php/conf.d/
-ADD ./resources/www/ /var/www-bak/
-ADD ./resources/sites/ /var/www-bak/web/sites/
+ADD resources/versions.sh /usr/local/bin/versions.sh
+ADD resources/conf.d/ /usr/local/etc/php/conf.d/
+ADD resources/www/ /var/www-bak/
+ADD resources/sites/ /var/www-bak/web/sites/
 
 RUN chown -R www-data:www-data /var/www \
     && chown -R www-data:www-data /var/www-bak \
@@ -38,5 +38,5 @@ WORKDIR /var/www
 
 STOPSIGNAL SIGTERM
 
-ADD ./resources/entrypoint /entrypoint
+ADD resources/entrypoint /entrypoint
 ENTRYPOINT [ "/entrypoint" ]
