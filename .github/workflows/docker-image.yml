@@ -57,6 +57,8 @@ jobs:
         
     - name: Deploy the image
       working-directory: scripts
+      env:
+        PASS: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       run: ./deploy.sh
       if: ${{ github.ref == 'refs/heads/main' }}
         
