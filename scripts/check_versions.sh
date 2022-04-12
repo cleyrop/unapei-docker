@@ -10,4 +10,4 @@ echo -e "\n*********************************************************************
 echo -e "\tDisplay versions ${CONFIG[name]}:${CONFIG[version]} !"
 echo -e "********************************************************************************\n\n"
 
-docker run -it --entrypoint versions.sh "${CONFIG[name]}:${CONFIG[version]}"
+docker run -it --entrypoint /usr/local/bin/versions.sh "${CONFIG[name]}:${CONFIG[version]}"

@@ -28,6 +28,7 @@ The image relies on the following parameters :
 - DRUPAL_DATABASE_USER : a user name that has rights on you db instance
 - DRUPAL_DATABASE_PASSWORD : the user password
 - DRUPAL_SITE_URL_LABEL : a key label to map your drupal site properly, depending on the accessible URL of the site, please refer to the [official Drupal Documentation](https://api.drupal.org/api/drupal/sites!example.sites.php/latest)
+- DRUPAL_TRUSTED_HOST_PATTERN : a pattern to match trusted hosts
 
 ## Config
 
