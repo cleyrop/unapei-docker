@@ -33,7 +33,10 @@ jobs:
         
     - name: Build the image
       working-directory: scripts
-      run: ./build.sh --no-cache
+      run: |
+        ls -al .
+        ls -al ../docker/resources
+        ./build.sh --no-cache
         
     - name: Test the image
       working-directory: scripts
