@@ -1,7 +1,0 @@
-hostname: # AI_SSH_HOSTNAME
-username: # AI_SSH_USERNAME
-password: # AI_SSH_PASSWORD
-logs: # AI_LOGS_LEVEL
-cap_falc_hostname: # CAPFALC_SSH_HOSTNAME
-cap_falc_username: # CAPFALC_SSH_USERNAME
-cap_falc_password: # CAPFALC_SSH_PASSWORD
