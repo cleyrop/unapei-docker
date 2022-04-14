@@ -12,13 +12,13 @@ if [ ! "$CONTENT" -gt 3 ]; then
     cp -rf /var/www-bak/* /var/www/
 fi
 
-sed -Ei "s/^(hostname: ).*\$/\1"$AI_SSH_HOSTNAME"/" /var/www-bak/web/sites/unapei.fr/config_usuCRJBIPPFeNKClUKIHhJJ8qkjL7OLfTwJP8Io9_IYg-s6MHkIS_z6txHnlc-NkYjrg24nOpw/unapei_ai.settings.yml
-sed -Ei "s/^(username: ).*\$/\1"$AI_SSH_USERNAME"/" /var/www-bak/web/sites/unapei.fr/config_usuCRJBIPPFeNKClUKIHhJJ8qkjL7OLfTwJP8Io9_IYg-s6MHkIS_z6txHnlc-NkYjrg24nOpw/unapei_ai.settings.yml
-sed -Ei "s/^(password: ).*\$/\1"$AI_SSH_PASSWORD"/" /var/www-bak/web/sites/unapei.fr/config_usuCRJBIPPFeNKClUKIHhJJ8qkjL7OLfTwJP8Io9_IYg-s6MHkIS_z6txHnlc-NkYjrg24nOpw/unapei_ai.settings.yml
-sed -Ei "s/^(logs: ).*\$/\1"$AI_LOGS_LEVEL"/" /var/www-bak/web/sites/unapei.fr/config_usuCRJBIPPFeNKClUKIHhJJ8qkjL7OLfTwJP8Io9_IYg-s6MHkIS_z6txHnlc-NkYjrg24nOpw/unapei_ai.settings.yml
-sed -Ei "s/^(cap_falc_hostname: ).*\$/\1"$CAPFALC_SSH_HOSTNAME"/" /var/www-bak/web/sites/unapei.fr/config_usuCRJBIPPFeNKClUKIHhJJ8qkjL7OLfTwJP8Io9_IYg-s6MHkIS_z6txHnlc-NkYjrg24nOpw/unapei_ai.settings.yml
-sed -Ei "s/^(cap_falc_username: ).*\$/\1"$CAPFALC_SSH_USERNAME"/" /var/www-bak/web/sites/unapei.fr/config_usuCRJBIPPFeNKClUKIHhJJ8qkjL7OLfTwJP8Io9_IYg-s6MHkIS_z6txHnlc-NkYjrg24nOpw/unapei_ai.settings.yml
-sed -Ei "s/^(cap_falc_password: ).*\$/\1"$CAPFALC_SSH_PASSWORD"/" /var/www-bak/web/sites/unapei.fr/config_usuCRJBIPPFeNKClUKIHhJJ8qkjL7OLfTwJP8Io9_IYg-s6MHkIS_z6txHnlc-NkYjrg24nOpw/unapei_ai.settings.yml
+sed -Ei "s/^(hostname: ).*\$/\1"$AI_SSH_HOSTNAME"/" /var/www/web/sites/unapei.fr/config_usuCRJBIPPFeNKClUKIHhJJ8qkjL7OLfTwJP8Io9_IYg-s6MHkIS_z6txHnlc-NkYjrg24nOpw/unapei_ai.settings.yml
+sed -Ei "s/^(username: ).*\$/\1"$AI_SSH_USERNAME"/" /var/www/web/sites/unapei.fr/config_usuCRJBIPPFeNKClUKIHhJJ8qkjL7OLfTwJP8Io9_IYg-s6MHkIS_z6txHnlc-NkYjrg24nOpw/unapei_ai.settings.yml
+sed -Ei "s/^(password: ).*\$/\1"$AI_SSH_PASSWORD"/" /var/www/web/sites/unapei.fr/config_usuCRJBIPPFeNKClUKIHhJJ8qkjL7OLfTwJP8Io9_IYg-s6MHkIS_z6txHnlc-NkYjrg24nOpw/unapei_ai.settings.yml
+sed -Ei "s/^(logs: ).*\$/\1"$AI_LOGS_LEVEL"/" /var/www/web/sites/unapei.fr/config_usuCRJBIPPFeNKClUKIHhJJ8qkjL7OLfTwJP8Io9_IYg-s6MHkIS_z6txHnlc-NkYjrg24nOpw/unapei_ai.settings.yml
+sed -Ei "s/^(cap_falc_hostname: ).*\$/\1"$CAPFALC_SSH_HOSTNAME"/" /var/www/web/sites/unapei.fr/config_usuCRJBIPPFeNKClUKIHhJJ8qkjL7OLfTwJP8Io9_IYg-s6MHkIS_z6txHnlc-NkYjrg24nOpw/unapei_ai.settings.yml
+sed -Ei "s/^(cap_falc_username: ).*\$/\1"$CAPFALC_SSH_USERNAME"/" /var/www/web/sites/unapei.fr/config_usuCRJBIPPFeNKClUKIHhJJ8qkjL7OLfTwJP8Io9_IYg-s6MHkIS_z6txHnlc-NkYjrg24nOpw/unapei_ai.settings.yml
+sed -Ei "s/^(cap_falc_password: ).*\$/\1"$CAPFALC_SSH_PASSWORD"/" /var/www/web/sites/unapei.fr/config_usuCRJBIPPFeNKClUKIHhJJ8qkjL7OLfTwJP8Io9_IYg-s6MHkIS_z6txHnlc-NkYjrg24nOpw/unapei_ai.settings.yml
 
 
 echo -e "\nComposer Install"
