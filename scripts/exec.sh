@@ -6,4 +6,4 @@ _DIR=$(dirname "${0}")
 source "${_DIR}/functions/config.sh"
 read_config "${_DIR}/../config/image.properties"
 
-docker exec -it -u root "${CONFIG[container]}" bash 
+docker exec -it -u ${1:-root} "${CONFIG[container]}" ${2:-bash} 
