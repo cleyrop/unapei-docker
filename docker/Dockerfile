@@ -1,4 +1,4 @@
-FROM php:8.1.5-apache-bullseye
+FROM php:7.4.21-apache-buster
 #https://github.com/docker-library/php/blob/af4cd1a2184cb2026431cddb5377391d19728fd4/8.1/bullseye/apache/Dockerfile
 
 RUN apt-get update -qq && apt-get install -yqq  --no-install-recommends \
@@ -21,6 +21,7 @@ RUN apt-get update -qq && apt-get install -yqq  --no-install-recommends \
     && docker-php-ext-install -j$(nproc) pdo_mysql \
     && docker-php-ext-install -j$(nproc) zip \
     && docker-php-ext-install -j$(nproc) exif \
+    && docker-php-ext-install -j$(nproc) gettext \
     && curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
     && chmod +x /usr/local/bin/composer \
@@ -29,7 +30,8 @@ RUN apt-get update -qq && apt-get install -yqq  --no-install-recommends \
     && sed -i 's/<VirtualHost \*:80>/<VirtualHost \*:8080>/g' /etc/apache2/sites-available/000-default.conf \
     && sed -i 's/Listen 80$/Listen 8080/g' /etc/apache2/ports.conf \
     && sed -i 's/<VirtualHost _default_:443>/<VirtualHost _default_:8443>/g' /etc/apache2/sites-available/default-ssl.conf \
-    && sed -i 's/Listen 443$/Listen 8443/g' /etc/apache2/ports.conf
+    && sed -i 's/Listen 443$/Listen 8443/g' /etc/apache2/ports.conf \
+    && a2enmod rewrite
 
 ADD resources/versions.sh /usr/local/bin/versions.sh
 ADD resources/conf.d/ /usr/local/etc/php/conf.d/
