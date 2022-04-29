@@ -1,4 +1,4 @@
-FROM php:8.1.4-apache-bullseye
+FROM php:8.1.5-apache-bullseye
 #https://github.com/docker-library/php/blob/af4cd1a2184cb2026431cddb5377391d19728fd4/8.1/bullseye/apache/Dockerfile
 
 RUN apt-get update -qq && apt-get install -yqq  --no-install-recommends \
@@ -9,6 +9,7 @@ RUN apt-get update -qq && apt-get install -yqq  --no-install-recommends \
         libjpeg62-turbo-dev \
         libpng-dev libxpm-dev \
         libfreetype6-dev \
+        libexif-dev \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/* \
     && curl https://pecl.php.net/get/ssh2-1.3.1.tgz -o ssh2.tgz \
@@ -19,6 +20,7 @@ RUN apt-get update -qq && apt-get install -yqq  --no-install-recommends \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install -j$(nproc) pdo_mysql \
     && docker-php-ext-install -j$(nproc) zip \
+    && docker-php-ext-install -j$(nproc) exif \
     && curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
     && chmod +x /usr/local/bin/composer \
