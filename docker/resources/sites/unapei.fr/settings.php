@@ -40,9 +40,13 @@ $settings['trusted_host_patterns'] = array(
 $config['shield.settings']['shield_enable'] = FALSE;
 
 $config['unapei_ai.settings']['hostname'] = getenv("AI_SSH_HOSTNAME");
+$config['unapei_ai.settings']['port'] = getenv("AI_SSH_PORT");
 $config['unapei_ai.settings']['username'] = getenv("AI_SSH_USERNAME");
 $config['unapei_ai.settings']['password'] = getenv("AI_SSH_PASSWORD");
+$config['unapei_ai.settings']['tmpdir'] = getenv("AI_TMP_DIR");
 $config['unapei_ai.settings']['logs'] = getenv("AI_LOGS_LEVEL");
 $config['unapei_ai.settings']['cap_falc_hostname'] = getenv("CAPFALC_SSH_HOSTNAME");
+$config['unapei_ai.settings']['cap_falc_port'] = getenv("CAPFALC_SSH_PORT");
 $config['unapei_ai.settings']['cap_falc_username'] = getenv("CAPFALC_SSH_USERNAME");
 $config['unapei_ai.settings']['cap_falc_password'] = getenv("CAPFALC_SSH_PASSWORD");
+$config['unapei_ai.settings']['cap_falc_tmpdir'] = getenv("CAPFALC_TMP_DIR");
