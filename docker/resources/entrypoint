@@ -18,5 +18,13 @@ echo -e "\nComposer Update"
 cd /var/www && composer update
 echo -e "\nLaunch previous entrypoint"
 docker-php-entrypoint
+
+echo -e "\nApply Drupal updates"
+/var/www/vendor/drush/drush/drush cr -y
+/var/www/vendor/drush/drush/drush updb -y
+/var/www/vendor/drush/drush/drush cr -y
+/var/www/vendor/drush/drush/drush cim -y
+/var/www/vendor/drush/drush/drush cr -y
+
 echo -e "\nLaunch apache"
 apache2-foreground
