@@ -1,6 +1,7 @@
 #!/bin/bash
 _PWD=$(pwd)
 _DIR=$(dirname "${0}")
+_BRANCH="${1}"
 
 #shellcheck source=functions/config.sh
 source "${_DIR}/functions/config.sh"
@@ -19,12 +20,12 @@ check "docker --version" "exit"
 
 TARGET_WWW="${_PWD}/../docker/resources/www"
 
-echo -e "\n *\tCheckout latest web"
+echo -e "\n *\tCheckout ${_BRANCH} from web"
 rm -rf "${TARGET_WWW}"
-git clone --quiet --depth 1 -b develop git@github.com:cleyrop/unapei.git "${TARGET_WWW}"
+git clone --quiet --depth 1 -b "${_BRANCH}" git@github.com:cleyrop/unapei.git "${TARGET_WWW}"
 rm -rf "${TARGET_WWW}"/.git*
 
-if [[ "copyFiles" = "${1}" ]]; then
+if [[ "copyFiles" = "${2}" ]]; then
     echo -e "\n *\tCopy external files "
     cd "${_PWD}/../../unapei-files/" || exit
     cp -rf files "${TARGET_WWW}"/web/sites/unapei.fr/
