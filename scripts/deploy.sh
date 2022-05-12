@@ -1,6 +1,10 @@
 #!/bin/bash
-
+_BRANCH="${2}"
 _DIR=$(dirname "${0}")
+
+if [[ ! -z ${_BRANCH+x} ]]; then
+    sed -i 's/^version=.*$/version='${_BRANCH}'/g' ../config/image.properties
+fi
 
 #shellcheck source=functions/config.sh
 source "${_DIR}/functions/config.sh"

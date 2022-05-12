@@ -3,6 +3,8 @@ _PWD=$(pwd)
 _DIR=$(dirname "${0}")
 _BRANCH="${1}"
 
+sed -i 's/^version=.*$/version='${_BRANCH}'/g' ../config/image.properties
+
 #shellcheck source=functions/config.sh
 source "${_DIR}/functions/config.sh"
 read_config "${_DIR}/../config/image.properties"
