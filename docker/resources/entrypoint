@@ -1,11 +1,5 @@
 #!/bin/bash
 
-echo -e "\n\t\tHello CapFalc"
-
-cat /etc/apache2/sites-available/000-default.conf
-cat /etc/apache2/sites-available/default-ssl.conf 
-cat /etc/apache2/ports.conf
-
 CONTENT=$(find . -printf x | wc -c)
 if [ ! "$CONTENT" -gt 3 ]; then
     echo -e "\nMove sources to target directory /var/www"
