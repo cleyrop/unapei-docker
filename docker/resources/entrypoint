@@ -13,9 +13,11 @@ if [ ! "$CONTENT" -gt 3 ]; then
 fi
 
 echo -e "\nComposer Install"
-cd /var/www && composer install
+cd /var/www && composer install -q
+
 echo -e "\nComposer Update"
-cd /var/www && composer update
+cd /var/www && composer update -q
+
 echo -e "\nLaunch previous entrypoint"
 docker-php-entrypoint
 
