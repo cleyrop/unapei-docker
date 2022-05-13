@@ -38,7 +38,8 @@ ADD resources/conf.d/ /usr/local/etc/php/conf.d/
 ADD resources/www/ /var/www-bak/
 ADD resources/sites/ /var/www-bak/web/sites/
 
-RUN chown -R www-data:www-data /var/www \
+RUN mkdir -p /var/www/web/sites/unapei.fr \
+    && chown -R www-data:www-data /var/www \
     && chown -R www-data:www-data /var/www-bak \
     && chmod +x /usr/local/bin/versions.sh
 
