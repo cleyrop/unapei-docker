@@ -1,7 +1,9 @@
 #!/bin/bash
 
-CONTENT=$(find . -printf x | wc -c)
-if [ ! "$CONTENT" -gt 3 ]; then
+echo -e "\nCheck Sources"
+CONTENT=$(ls -l /var/www | wc -l)
+echo "CONTENT(${CONTENT})"
+if [ "${CONTENT}" -lt 4 ]; then
     echo -e "\nMove sources to target directory /var/www"
     cp -rf /var/www-bak/* /var/www/
 fi
