@@ -49,4 +49,4 @@ $config['unapei_ai.settings']['cap_falc_hostname'] = getenv("CAPFALC_SSH_HOSTNAM
 $config['unapei_ai.settings']['cap_falc_port'] = getenv("CAPFALC_SSH_PORT");
 $config['unapei_ai.settings']['cap_falc_username'] = getenv("CAPFALC_SSH_USERNAME");
 $config['unapei_ai.settings']['cap_falc_password'] = getenv("CAPFALC_SSH_PASSWORD");
-$config['unapei_ai.settings']['cap_falc_tmpdir'] = getenv("CAPFALC_TMP_DIR");
+$config['unapei_ai.settings']['cap_falc_tmpdir'] = getenv("CAPFALC_SSH_TMPDIR");
