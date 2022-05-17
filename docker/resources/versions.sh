@@ -28,3 +28,9 @@ php --ri mbstring
 echo -e "\n[ssh2]"
 php --ri ssh2
 
+echo -e "\nList PHP Modules compiled :"
+php -m
+
+echo -e "\nList PHP Modules installed :"
+dpkg --get-selections | grep -i php
+
