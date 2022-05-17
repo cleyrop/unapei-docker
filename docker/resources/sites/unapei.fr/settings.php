@@ -52,6 +52,7 @@ $config['unapei_ai.settings']['cap_falc_password'] = getenv("CAPFALC_SSH_PASSWOR
 
 $config['unapei_ai.settings']['cap_falc_tmpdir'] = getenv("CAPFALC_SSH_TMPDIR");
 
+$config['swiftmailer.transport']['transport'] = getenv("MAILER_TRANSPORT");
 $config['swiftmailer.transport']['smtp_host'] = getenv("SMTP_HOST");
 $config['swiftmailer.transport']['smtp_port'] = getenv("SMTP_PORT");
 $config['swiftmailer.transport']['smtp_encryption'] = getenv("SMTP_ENCRYPTION");
