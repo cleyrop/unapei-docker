@@ -18,7 +18,7 @@ echo -e "\nLaunch previous entrypoint"
 docker-php-entrypoint
 
 echo -e "\nApply Drupal updates"
-cd /var/www/web/sites/unapei.fr || exit
+cd /var/www/web/sites/unapei.fr ||:
 /var/www/vendor/drush/drush/drush cr -y
 /var/www/vendor/drush/drush/drush updb -y
 /var/www/vendor/drush/drush/drush cr -y
