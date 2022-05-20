@@ -22,6 +22,7 @@ RUN apt-get update -qq && apt-get install -yqq  --no-install-recommends \
     && docker-php-ext-install -j$(nproc) zip \
     && docker-php-ext-install -j$(nproc) exif \
     && docker-php-ext-install -j$(nproc) gettext \
+    && docker-php-ext-install -j$(nproc) bcmath \
     && curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
     && chmod +x /usr/local/bin/composer \
