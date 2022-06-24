@@ -30,7 +30,7 @@ commandTests:
     command: "php"
     args: ["-v"]
     exitCode: 0
-    expectedOutput: ["PHP 8."]
+    expectedOutput: ["PHP 7.4.21"]
 
   - name: "XML extension"
     command: "bash"
@@ -76,7 +76,7 @@ commandTests:
       - -c
       - php --ri curl | grep -i curl
     exitCode: 0
-    expectedOutput: ["cURL support => enabled", "cURL Information => 7.74"]
+    expectedOutput: ["cURL support => enabled", "cURL Information => 7.64"]
 
   - name: "mbstring extension"
     command: "bash"
@@ -92,7 +92,7 @@ commandTests:
       - -c
       - php --ri ssh2
     exitCode: 0
-    expectedOutput: ["SSH2 support => enabled", "extension version => 1.3", "libssh2 version => 1.9"]
+    expectedOutput: ["SSH2 support => enabled", "extension version => 1.3", "libssh2 version => 1.8"]
 
 
 #memrory min 256M
